@@ -30,7 +30,18 @@ const markers = [
   { markerOffset: 15, name: "Lima", coordinates: [-77.0428, -12.0464] }
 ];
 
-const MapChart = () => {
+const rounded = num => {
+  if (num > 1000000000) {
+    return Math.round(num / 100000000) / 10 + "Bn";
+  } else if (num > 1000000) {
+    return Math.round(num / 100000) / 10 + "M";
+  } else {
+    return Math.round(num / 100) / 10 + "K";
+  }
+};
+
+
+const MapChart = ({ setTooltipContent }) => {
   return (
     <ComposableMap
     //   projection="geoAzimuthalEqualArea"
@@ -51,21 +62,70 @@ const MapChart = () => {
                 geography={geo}
                 fill="#EAEAEC"
                 stroke="#D6D6DA"
+                onMouseEnter={() => {
+                  const { NAME, POP_EST } = geo.properties;
+                  setTooltipContent(`${NAME} — ${rounded(POP_EST)}`);
+                }}
+                onMouseLeave={() => {
+                  setTooltipContent("");
+                }}
+                style={{
+                  default: {
+                    fill: "#D6D6DA",
+                    stroke: "#D6D6DA",
+                    outline: "none"
+                  },
+                  hover: {
+                    fill: "#F53",
+                    stroke: "#F53",
+                    outline: "none"
+                  },
+                  pressed: {
+                    fill: "#E42",
+                    stroke: "#E42",
+                    outline: "none"
+                  }
+                }}
               />
             ))
         }
-      </Geographies>
-      {markers.map(({ name, coordinates, markerOffset }) => (
-        <Marker key={name} coordinates={coordinates}>
+        </Geographies>
+        {/* {markers.map(({ name, coordinates, markerOffset }) => (
+          <Marker key={name} coordinates={coordinates}
+            onMouseEnter={() => {
+              console.log('mouse enter');
+              // setTooltipContent(`MouseEnter`);
+              // const { NAME, POP_EST } = geo.properties;
+              setTooltipContent(`${name}`);
+            }}
+            onMouseLeave={() => {
+              console.log('mouse leave');
+              setTooltipContent("");
+            }}
+            style={{
+              default: {
+            fill: "#D6D6DA",
+            outline: "none"
+          },
+          hover: {
+            fill: "#F53",
+            outline: "none"
+          },
+          pressed: {
+            fill: "#E42",
+            outline: "none"
+          }
+        }}
+        >
           <g
             fill="none"
             stroke="#aa1133"
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            transform="translate(-12, -24)"
+            transform="scale(0.5) translate(-12, -24) "
           >
-            <circle cx="12" cy="10" r="3" />
+            <circle cx="12" cy="10" r="3" /> 
             <path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" />
           </g>
           <text
@@ -76,7 +136,7 @@ const MapChart = () => {
             {name}
           </text>
         </Marker>
-      ))}
+      ))} */}
       </ZoomableGroup>
     </ComposableMap>
   );
