@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import ReactTooltip from "react-tooltip";
-
-import "./styles.css";
-
 import MapChart from "./components/MapChart";
 
-function App() {
+// import "./styles.css";
+
+
+
+function MapMercator({markers}) {
   const [content, setContent] = useState("");
   return (
     <div>
-      <MapChart setTooltipContent={setContent} />
+      <MapChart setTooltipContent={setContent} markers={markers}/>
       {console.log('App content ', content)}
       <ReactTooltip>{content}</ReactTooltip>
     </div>
   );
 }
 
-export default App;
+export default MapMercator;
