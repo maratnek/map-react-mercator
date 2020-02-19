@@ -1,16 +1,26 @@
 html {
-    font-family: system-ui, sans-serif;
-    font-size: 1.25rem;
-  }
-  
-  body {
-    margin: 0;
-    padding: 0 1.5rem;
-    background-color: #f8a659;
-    padding-top: 100px;
-  }
-  
-  svg {
-    display: inline-block;
-    vertical-align: middle;
-  }
+  font-family: system-ui, sans-serif;
+  font-size: 1.25rem;
+}
+
+body {
+  margin: 0;
+  padding: 0 1.5rem;
+  background-color: #f8a659;
+  padding-top: 100px;
+}
+
+svg {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.mapChart {
+  background-color: #fff;
+  /* width: 50%; */
+}
+
+.mapMarker {
+  /* stroke: yellow; */
+  /* fill: red; */
+}
